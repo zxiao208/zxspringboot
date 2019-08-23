@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhaoxiao.zxspringboot.dao.UserDao">
+    <resultMap type="com.zhaoxiao.zxspringboot.bean.User" id="UserResult">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="password" column="password_md5" jdbcType="VARCHAR"/>
+        <result property="userToken" column="user_token" jdbcType="VARCHAR"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getAllAdminUsers" resultMap="UserResult">
+        select id,user_name,is_deleted,create_time from tb_admin_user
+        order by id desc
+    </select>
+</mapper>
