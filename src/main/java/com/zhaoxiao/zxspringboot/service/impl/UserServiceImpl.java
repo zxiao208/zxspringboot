@@ -14,11 +14,12 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
-    @Autowired
+    //这个要加required =false，不加运行也不会错
+    @Autowired(required = false)
     UserDao userDao;
     @Override
     public List<User> findAllUser() {
-        userDao.addUser();
-        return null;
+        List<User> users=userDao.getAllAdminUsers();
+        return users;
     }
 }

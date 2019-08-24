@@ -1,6 +1,9 @@
 package com.zhaoxiao.zxspringboot.dao;
 
+import com.zhaoxiao.zxspringboot.bean.User;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author zhaoxiao
@@ -10,8 +13,5 @@ public interface UserDao {
     /**
      *
      */
-    void addUser();
-    void updateUser();
-    void deleteUser();
-    void selectUser();
+    List<User> getAllAdminUsers();
 }
