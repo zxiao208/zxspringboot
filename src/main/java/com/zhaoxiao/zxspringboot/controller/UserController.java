@@ -19,7 +19,7 @@ public class UserController {
         @Autowired
         private UserService userService;
         @RequestMapping("login")
-        public @ResponseBody String Login(){
+        public @ResponseBody String Login(){  //@ResponseBody 自动转成json格式
                 List<User> users = userService.findAllUser();
                 return users.get(0).getUserName();
         }

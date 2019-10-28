@@ -14,7 +14,7 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
-    //这个要加required =false，不加运行也不会错
+    //这个要加required =false，不加运行也不会错 表示忽略当前要注入的bean，如果有直接注入，没有跳过，不会报错。
     @Autowired(required = false)
     UserDao userDao;
     @Override
