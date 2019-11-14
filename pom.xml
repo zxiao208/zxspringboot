@@ -21,6 +21,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<logback.version>1.0.7</logback.version>
+		<log4j.over.slf4j>1.7.7</log4j.over.slf4j>
 	</properties>
 
 	<dependencies>
@@ -60,13 +62,39 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.11</version>
 		</dependency>
+
+		<!-- aspectj -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+
 		<!-- 分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-
+		<!-- 日志处理 -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${log4j.over.slf4j}</version>
+		</dependency>
 		<!--log4j-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
