@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zhaoxiao.zxspringboot.dao.UserDao">
-    <resultMap type="com.zhaoxiao.zxspringboot.bean.User" id="UserResult">
+<mapper namespace="com.zhaoxiao.zxspringboot.dao.NovelTitleDao">
+    <resultMap type="com.zhaoxiao.zxspringboot.bean.NovelTitle" id="NovelTitleResult">
         <id property="id" column="id" jdbcType="BIGINT"/>
-        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
-        <result property="password" column="password_md5" jdbcType="VARCHAR"/>
-        <result property="userToken" column="user_token" jdbcType="VARCHAR"/>
-        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="desc" column="password_md5" jdbcType="VARCHAR"/>
+        <result property="author" column="user_token" jdbcType="VARCHAR"/>
+        <result property="noveltypeId" column="is_deleted" jdbcType="BIGINT"/>
+        <result property="tags" column="create_time" jdbcType="VARCHAR"/>
+        <result property="collectionNum" column="create_time" jdbcType="VARCHAR"/>
+        <result property="score" column="create_time" jdbcType="BIGINT"/>
+        <result property="downUrl" column="create_time" jdbcType="VARCHAR"/>
+        <result property="imgUrl" column="create_time" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="getAllAdminUsers" resultMap="UserResult">
+    <select id="getAllNovel" resultMap="NovelTitleResult">
         select id,user_name,is_deleted,create_time from tb_admin_user
         order by id desc
     </select>

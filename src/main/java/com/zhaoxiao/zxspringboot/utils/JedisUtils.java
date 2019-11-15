@@ -58,10 +58,14 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			value = jedis.get(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
-			returnResource(pool, jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 		}
 		return value;
 	}
@@ -79,11 +83,15 @@ public class JedisUtils {
 			jedis = pool.getResource();//每次操作时向pool借用个jedis对象，用完即还?
 			return jedis.set(key, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 			return "0";
 		} finally {
-			returnResource(pool, jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 		}
 	}
 
@@ -100,11 +108,15 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			return jedis.set(keyBytes, valueBytes);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 			return "0";
 		} finally {
-			returnResource(pool, jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 		}
 	}
 	/**
@@ -120,10 +132,14 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			value = jedis.get(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
-			returnResource(pool, jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 		}
 		return value;
 	}
@@ -140,11 +156,15 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			return jedis.del(keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 			return 0L;
 		} finally {
-			returnResource(pool, jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 		}
 	}
 
@@ -162,11 +182,15 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.append(key, str);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 			return 0L;
 		} finally {
-			returnResource(pool, jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 		}
 		return res;
 	}
@@ -183,11 +207,15 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			return jedis.exists(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 			return false;
 		} finally {
-			returnResource(pool, jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 		}
 	}
 
@@ -204,7 +232,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			return jedis.setnx(key, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 			return 0L;
 		} finally {
@@ -228,7 +258,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.setex(key, seconds, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -253,7 +285,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			return jedis.setrange(key, offset, str);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 			return 0L;
 		} finally {
@@ -275,7 +309,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			values = jedis.mget(keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -298,7 +334,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.mset(keysvalues);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -323,7 +361,9 @@ public class JedisUtils {
 			pipe.sync(); //执行命令，完全此时pipeline对象的远程调 
 			flag = true;
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -344,7 +384,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.msetnx(keysvalues);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -366,7 +408,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.getSet(key, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -390,7 +434,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.getrange(key, startOffset, endOffset);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -411,7 +457,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.incr(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -433,7 +481,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.incrBy(key, integer);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -454,7 +504,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.decr(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -476,7 +528,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.decrBy(key, integer);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -497,7 +551,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.strlen(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -521,7 +577,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hset(key, field, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -544,7 +602,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hsetnx(key, field, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -566,7 +626,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hmset(key, hash);			
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -588,7 +650,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hget(key, field);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -611,7 +675,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hmget(key, fields);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -634,7 +700,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hincrBy(key, field, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -656,7 +724,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hexists(key, field);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -677,7 +747,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hlen(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -692,7 +764,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hgetAll(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -715,7 +789,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hdel(key, fields);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -729,7 +805,9 @@ public class JedisUtils {
 				jedis = pool.getResource();
 				res = jedis.zrange(key, start, end);
 			} catch (Exception e) {
-				pool.returnBrokenResource(jedis);
+				if (jedis != null) {
+					jedis.close();
+				}
 				e.printStackTrace();
 			} finally {
 				returnResource(pool, jedis);
@@ -749,7 +827,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hkeys(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -770,7 +850,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hvals(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -791,7 +873,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hgetAll(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -816,7 +900,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.lpush(key, strs);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -841,7 +927,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.rpush(key, strs);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -870,7 +958,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.linsert(key, where, pivot, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -899,7 +989,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.lset(key, index, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -925,7 +1017,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.lrem(key, count, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -950,7 +1044,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.ltrim(key, start, end);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -973,7 +1069,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.lpop(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -996,7 +1094,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.rpop(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1023,7 +1123,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.rpoplpush(srckey, dstkey);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1047,7 +1149,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.lindex(key, index);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1070,7 +1174,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.llen(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1098,7 +1204,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.lrange(key, start, end);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1123,7 +1231,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sadd(key, members);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1138,7 +1248,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			jedis.expire(key, times);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1161,7 +1273,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.srem(key, members);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1184,7 +1298,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.spop(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1211,7 +1327,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sdiff(keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1240,7 +1358,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sdiffstore(dstkey, keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1264,7 +1384,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sinter(keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1289,7 +1411,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sinterstore(dstkey, keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1313,7 +1437,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sunion(keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1338,7 +1464,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sunionstore(dstkey, keys);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1366,7 +1494,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.smove(srckey, dstkey, member);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1389,7 +1519,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.scard(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1413,7 +1545,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.sismember(key, member);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1436,7 +1570,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.srandmember(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1459,7 +1595,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.smembers(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1481,7 +1619,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zadd(key, scoreMembers);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1504,7 +1644,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zadd(key, score, member);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1527,7 +1669,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zrem(key, members);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1550,7 +1694,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zincrby(key, score, member);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1564,7 +1710,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.hincrBy(key, field, value);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1585,7 +1733,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zrank(key, member);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1607,7 +1757,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zrevrank(key, member);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1630,7 +1782,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zrevrange(key, start, end);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1653,7 +1807,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zrevrangeByScore(key, max, min);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1676,7 +1832,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zrevrangeByScore(key, max, min);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1699,7 +1857,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zcount(key, min, max);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1720,7 +1880,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zcard(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1742,7 +1904,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zscore(key, member);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1765,7 +1929,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zremrangeByRank(key, start, end);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1788,7 +1954,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.zremrangeByScore(key, start, end);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1809,7 +1977,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.keys(pattern);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1830,7 +2000,9 @@ public class JedisUtils {
 			jedis = pool.getResource();
 			res = jedis.type(key);
 		} catch (Exception e) {
-			pool.returnBrokenResource(jedis);
+			if (jedis != null) {
+				jedis.close();
+			}
 			e.printStackTrace();
 		} finally {
 			returnResource(pool, jedis);
@@ -1846,7 +2018,7 @@ public class JedisUtils {
 	 */
 	public static void returnResource(JedisPool pool, Jedis jedis) {
 		if (jedis != null) {
-			pool.returnResource(jedis);
+				jedis.close();
 		}
 	}
 }
