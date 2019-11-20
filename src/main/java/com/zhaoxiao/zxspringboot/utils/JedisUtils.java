@@ -21,9 +21,9 @@ import java.util.Set;
 public class JedisUtils {
 
 	private JedisPool pool = null;
-	private String ip = "192.168.42.111";
+	private String ip = "45.77.128.156";
 	private int port = 6379;
-	private String auth = "12345678";
+	private String auth = "zhaoxiao123";
 
 	/**
 	 * 传入ip和端口号构建redis 连接
