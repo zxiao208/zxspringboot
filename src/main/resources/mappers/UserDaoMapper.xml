@@ -11,9 +11,13 @@
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <select id="getAllAdminUsers" resultMap="UserResult">
+    <select id="getAllAdminUsers" parameterType="Map" resultMap="UserResult">
         select id,name,is_delete,create_time from users
+        where is_deleted=0
         order by id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
     </select>
 
 </mapper>

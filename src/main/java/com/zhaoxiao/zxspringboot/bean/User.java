@@ -17,6 +17,7 @@ public class User implements Serializable {
     private int isDeleted;
     private Date createTime;
 
+
     public long getId() {
         return id;
     }

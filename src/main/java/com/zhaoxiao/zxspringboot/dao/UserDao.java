@@ -11,7 +11,8 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     /**
-     *
+     *查找所有注册用户
      */
     List<User> getAllAdminUsers();
+
 }
