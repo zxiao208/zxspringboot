@@ -22,7 +22,7 @@ public class NovelTitle
 
     private int id;
     private String title;
-    private String desc;
+    private String introduce;
     private String author;
     private int noveltypeId;
     private String tags;
@@ -47,12 +47,12 @@ public class NovelTitle
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getIntroduce() {
+        return introduce;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 
     public String getAuthor() {

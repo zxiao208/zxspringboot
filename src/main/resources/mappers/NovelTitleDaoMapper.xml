@@ -5,18 +5,18 @@
     <resultMap type="com.zhaoxiao.zxspringboot.bean.NovelTitle" id="NovelTitleResult">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
-        <result property="desc" column="password_md5" jdbcType="VARCHAR"/>
-        <result property="author" column="user_token" jdbcType="VARCHAR"/>
-        <result property="noveltypeId" column="is_deleted" jdbcType="BIGINT"/>
-        <result property="tags" column="create_time" jdbcType="VARCHAR"/>
-        <result property="collectionNum" column="create_time" jdbcType="VARCHAR"/>
-        <result property="score" column="create_time" jdbcType="BIGINT"/>
-        <result property="downUrl" column="create_time" jdbcType="VARCHAR"/>
-        <result property="imgUrl" column="create_time" jdbcType="VARCHAR"/>
+        <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="noveltypeId" column="noveltypeId" jdbcType="BIGINT"/>
+        <result property="tags" column="tags" jdbcType="VARCHAR"/>
+        <result property="collectionNum" column="collectionNum" jdbcType="VARCHAR"/>
+        <result property="score" column="score" jdbcType="BIGINT"/>
+        <result property="downUrl" column="downUrl" jdbcType="VARCHAR"/>
+        <result property="imgUrl" column="imgUrl" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getAllNovel" resultMap="NovelTitleResult">
-        select id,user_name,is_deleted,create_time from tb_admin_user
+        select id,title,introduce,author from novel_title
         order by id desc
     </select>
 
